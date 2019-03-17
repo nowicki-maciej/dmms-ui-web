@@ -36,7 +36,7 @@
     name: "LoginForm",
     data() {
       return {
-        form: {
+        user: {
           email: '',
           password: '',
         },
@@ -44,6 +44,7 @@
     },
     methods: {
       onSubmit: function () {
+        // TODO integrate with backend
         // const vm = this;
         //
         // let payload = {
