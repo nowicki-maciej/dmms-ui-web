@@ -2,6 +2,9 @@
   <div>
     <b-container>
       <b-row>
+          <img class="logo" src="/static/logo.png" alt="logo">
+      </b-row>
+      <b-row>
         <b-col md="4" offset-md="4" class="login-form">
           <h1>Sign in to DMMS</h1>
           <b-form @submit.prevent="onSubmit">
@@ -40,6 +43,10 @@
           email: '',
           password: '',
         },
+        form: {
+          login: '',
+          password: ''
+        },
       }
     },
     methods: {
@@ -63,5 +70,11 @@
 </script>
 
 <style scoped>
-
+  .logo {
+    /*display: block;*/
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    margin-bottom: 20px;
+  }
 </style>
