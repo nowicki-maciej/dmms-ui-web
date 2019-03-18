@@ -4,17 +4,19 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import {library} from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faUserPlus,
   faUserMinus,
   faUserEdit
 } from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+require('./assets/css/global.css');
 
 library.add(faUserPlus);
 library.add(faUserMinus);
@@ -27,6 +29,6 @@ Vue.use(BootstrapVue);
 new Vue({
   el: '#app',
   router,
-  components: {App},
+  components: { App },
   template: '<App/>'
 });
