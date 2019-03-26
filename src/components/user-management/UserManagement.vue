@@ -7,7 +7,9 @@
       </b-button>
     </div>
 
-    <user-list :users="users" @user-edit="userEdit"/>
+    <user-list :users="users"
+               @user-edit="userEdit"
+               @user-delete="userDelete"/>
 
     <user-details-modal :user="newUser"
                         :onSubmit="registerNewUser"/>
@@ -17,44 +19,63 @@
 <script>
   import UserList from "./UserList";
   import UserDetailsModal from "./UserDetailsModal";
+  import HttpClient from "../../helpers/HttpClient";
 
   export default {
     name: "UserManagement",
     components: { UserDetailsModal, UserList },
+    mixins: [HttpClient],
     data() {
       return {
-        users: [
-          {
-            id: 1,
-            login: "login1",
-            displayName: "Jan Kowalski",
-            email: 'jkowalski@gmail.com',
-            role: "ADMIN"
-          },
-          {
-            id: 2,
-            login: "login2",
-            displayName: "Andrzej Nowak",
-            email: 'anowak@gmail.com',
-            role: "USER"
-          }
-        ],
+        users: [],
         newUser: {
           login: '',
           password: '',
           repeatedPassword: '',
           email: '',
           displayName: '',
-          type: null,
+          role: null,
         }
       }
     },
+    mounted: function () {
+      this.get("/users/current")
+        .then(response => {
+          console.log(response.data);
+        });
+
+      this.refreshUserList();
+
+    },
     methods: {
+      refreshUserList: function() {
+        const vm = this;
+
+        this.get("/users")
+          .then(response => {
+            vm.users = response.data;
+          })
+      },
       userEdit: function (id) {
         console.log("User edit of ID ", id);
       },
+      userDelete: function (id) {
+        const vm = this;
+        this.delete("/users/" + id)
+          .then(() => {
+            vm.refreshUserList();
+          });
+      },
       registerNewUser: function () {
-        console.log("Registering new user: ", this.newUser)
+        const vm = this;
+        this.newUser.role = this.newUser.role.toUpperCase();
+
+        this.post("/users", this.newUser)
+          .then(response => {
+            vm.refreshUserList();
+          });
+
+        this.users.push(this.newUser);
       }
     }
   }

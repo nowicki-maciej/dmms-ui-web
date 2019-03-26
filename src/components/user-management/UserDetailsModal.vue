@@ -42,7 +42,7 @@
         </b-form-input>
       </b-form-group>
       <b-form-group>
-        <b-form-select v-model="user.type"
+        <b-form-select v-model="user.role"
                        :options="accountTypeOptions">
           <template slot="first">
             <option :value="null" disabled selected>-- Account type --</option>

@@ -15,7 +15,7 @@
           <font-awesome-icon icon="user-edit"/>
         </b-button>
 
-        <b-button variant="danger" @click="deleteUser(row.item.id)">
+        <b-button variant="danger" @click="$emit('user-delete', row.item.id)">
           <font-awesome-icon icon="user-minus"/>
         </b-button>
       </template>
@@ -24,10 +24,14 @@
 </template>
 
 <script>
+  import HttpClient from "../../helpers/HttpClient";
+
   export default {
     name: "UserList",
+    mixins: [HttpClient],
     props: [
-      'users'
+      'users',
+      'onDelete'
     ],
     data() {
       return {
@@ -35,7 +39,7 @@
           { key: 'login', label: 'Login' },
           { key: 'displayName', label: 'Display name' },
           { key: 'email', label: 'Email' },
-          { key: 'role', label: 'Account type' },
+          { key: 'role', label: 'Role' },
           { key: 'action', label: 'Action' },
         ],
         user: {
@@ -44,15 +48,13 @@
           repeatedPassword: '',
           email: '',
           displayName: '',
-          type: ''
+          role: ''
         },
         showModal: false,
       }
     },
     methods: {
-      deleteUser: function (id) {
-        console.log("Deleting user if ID ", id);
-      }
+
     }
   }
 </script>

@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <b-row>
-          <img class="logo" src="/static/logo.png" alt="logo">
+        <img class="logo" src="/static/logo.png" alt="logo">
       </b-row>
       <b-row>
         <b-col md="4" offset-md="4" class="login-form">
@@ -11,7 +11,7 @@
             <b-form-group>
               <b-form-input id="login-form_username"
                             type="text"
-                            v-model="form.username"
+                            v-model="form.login"
                             required
                             placeholder="Username">
               </b-form-input>
@@ -33,16 +33,13 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import HttpClient from '../helpers/HttpClient';
 
   export default {
     name: "LoginForm",
+    mixins: [HttpClient],
     data() {
       return {
-        user: {
-          email: '',
-          password: '',
-        },
         form: {
           login: '',
           password: ''
@@ -51,19 +48,15 @@
     },
     methods: {
       onSubmit: function () {
-        // TODO integrate with backend
-        // const vm = this;
-        //
-        // let payload = {
-        //   email: this.form.email,
-        //   password: this.form.password
-        // };
-        //
-        // axios.post("http://localhost:9090/users", payload)
-        //   .then(function () {
-        //     vm.registerSuccessful = true;
-        //     vm.$router.push("/")
-        //   });
+        let login = this.form.login;
+        let password = this.form.password;
+        const vm = this;
+
+        this.post("/user-management/login", { login, password })
+          .then(response => {
+            console.log(response);
+            vm.$router.push('/user-management');
+          });
       }
     }
   }
