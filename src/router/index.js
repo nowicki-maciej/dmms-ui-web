@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginForm from "../components/LoginForm";
 import UserManagement from "../components/user-management/UserManagement";
-import 'vue-loading-overlay/dist/vue-loading.css';
 
 Vue.use(Router);
 
