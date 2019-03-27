@@ -1,74 +1,70 @@
 <template>
   <b-modal id="new-user-modal"
            centered
-           title="Submit your name"
+           title="Register new user"
            style="color: black"
            size="lg"
-           @ok="onSubmit">
+           @ok="submitForm">
     <b-form>
-      <b-form-group>
-        <b-form-input type="text"
-                      v-model="user.login"
-                      required
-                      placeholder="Username">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group>
-        <b-form-input type="password"
-                      v-model="user.password"
-                      required
-                      placeholder="Password">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group>
-        <b-form-input type="password"
-                      v-model="user.repeatedPassword"
-                      required
-                      placeholder="Repeated password">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group>
-        <b-form-input type="email"
-                      v-model="user.email"
-                      required
-                      placeholder="Email">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group>
-        <b-form-input type="text"
-                      v-model="user.displayName"
-                      required
-                      placeholder="Display name">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group>
-        <b-form-select v-model="user.role"
-                       :options="accountTypeOptions">
-          <template slot="first">
-            <option :value="null" disabled selected>-- Account type --</option>
-          </template>
-        </b-form-select>
-      </b-form-group>
+      <input-simple type="text"
+                    v-model="newUser.login"
+                    required
+                    placeholder="Username"
+      />
+      <input-simple type="password"
+                    v-model="newUser.password"
+                    required
+                    placeholder="Password"
+      />
+      <input-simple type="password"
+                    v-model="newUser.repeatedPassword"
+                    required
+                    placeholder="Repeated password"
+      />
+      <input-simple type="email"
+                    v-model="newUser.email"
+                    required
+                    placeholder="Email"
+      />
+      <input-simple type="text"
+                    v-model="newUser.displayName"
+                    required
+                    placeholder="Display name"
+      />
+
+      <role-selector v-model="newUser.role"/>
     </b-form>
   </b-modal>
 </template>
+
 <script>
+  import InputSimple from '../form/InputSimple';
+  import RoleSelector from './RoleSelector';
+
   export default {
     name: 'user-details-modal',
-    props: [
-      'user',
-      'onSubmit',
-      'onCancel'
-    ],
+    components: { InputSimple, RoleSelector },
     data() {
       return {
-        accountTypeOptions: ["Admin", "User"],
+        newUser: {
+          login: '',
+          password: '',
+          repeatedPassword: '',
+          email: '',
+          displayName: '',
+          role: null,
+        }
       }
     },
+    methods: {
+      submitForm() {
+        this.$emit('onSubmit', this.newUser);
+      }
+    }
   }
 </script>
-<style scoped>
 
+<style scoped>
   #new-user-modal {
     color: black;
   }

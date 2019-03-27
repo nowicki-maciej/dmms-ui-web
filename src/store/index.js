@@ -5,7 +5,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    counter: 0,
+    appLoading: false,
+    currentUser: null
+  },
+  mutations: {
+    appLoading (state, loading) {
+      state.appLoading = loading;
+    },
+  },
+  actions: {
+
   }
 });
 

@@ -54,7 +54,7 @@
 
         this.post("/user-management/login", { login, password })
           .then(response => {
-            console.log(response);
+            localStorage.setItem('currentUser', JSON.stringify(response.data));
             vm.$router.push('/user-management');
           });
       }
@@ -64,7 +64,6 @@
 
 <style scoped>
   .logo {
-    /*display: block;*/
     margin-left: auto;
     margin-right: auto;
     height: 250px;
