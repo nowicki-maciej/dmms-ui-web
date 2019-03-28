@@ -12,24 +12,35 @@
 
       <template slot="action" slot-scope="row">
         <b-button variant="primary"
-                  @click="$emit('user-edit', row.item.id)">
+                  v-b-modal.edit-user-modal
+                  @click="userEdit(row.item.id)">
           <font-awesome-icon icon="user-edit"/>
         </b-button>
+
         <b-button variant="danger"
-                  @click="$emit('user-delete', row.item.id)"
+                  @click="userDelete(row.item.id)"
                   v-if="row.item.id !== currentUserId">
           <font-awesome-icon icon="user-minus"/>
         </b-button>
       </template>
+
     </b-table>
+
+    <user-edit-modal v-if="showUserEditModal"
+                     :show="showUserEditModal"
+                     :user="userToEdit"
+    />
+
   </div>
 </template>
 
 <script>
   import HttpClient from "../../helpers/HttpClient";
+  import UserEditModal from './UserEditModal';
 
   export default {
     name: "UserList",
+    components: { UserEditModal },
     mixins: [HttpClient],
     props: [
       'users',
@@ -45,6 +56,8 @@
           { key: 'action', label: 'Action' },
         ],
         currentUserId: JSON.parse(localStorage.getItem('currentUser')).id,
+        userToEdit: {},
+        showUserEditModal: false,
         user: {
           login: '',
           password: '',
@@ -53,10 +66,23 @@
           displayName: '',
           role: ''
         },
-        showModal: false,
       }
     },
-    methods: {},
+    methods: {
+      userEdit: function (id) {
+        Object.assign(this.userToEdit, this.users.find(e => e.id === id));
+        this.showUserEditModal = true;
+        this.$emit('edit-user-modal');
+      },
+
+      userDelete: function (id) {
+        const vm = this;
+        this.delete("/users/" + id)
+          .then(() => {
+            vm.$emit('change');
+          });
+      },
+    },
   }
 </script>
 

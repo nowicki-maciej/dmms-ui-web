@@ -4,7 +4,7 @@
            title="Register new user"
            style="color: black"
            size="lg"
-           @ok="submitForm">
+           @ok="registerUser">
     <b-form>
       <input-simple type="text"
                     v-model="newUser.login"
@@ -42,7 +42,7 @@
   import RoleSelector from './RoleSelector';
 
   export default {
-    name: 'user-details-modal',
+    name: 'UserDetailsModal',
     components: { InputSimple, RoleSelector },
     data() {
       return {
@@ -57,8 +57,13 @@
       }
     },
     methods: {
-      submitForm() {
-        this.$emit('onSubmit', this.newUser);
+      registerUser: function (user) {
+        const vm = this;
+
+        this.post("/users", user)
+          .then(() => {
+            vm.$emit('change');
+          });
       }
     }
   }

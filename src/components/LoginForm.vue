@@ -8,22 +8,16 @@
         <b-col md="4" offset-md="4" class="login-form">
           <h1>Sign in to DMMS</h1>
           <b-form @submit.prevent="onSubmit">
-            <b-form-group>
-              <b-form-input id="login-form_username"
-                            type="text"
-                            v-model="form.login"
-                            required
-                            placeholder="Username">
-              </b-form-input>
-            </b-form-group>
-            <b-form-group>
-              <b-form-input id="login-form_password"
-                            type="password"
-                            v-model="form.password"
-                            required
-                            placeholder="Password">
-              </b-form-input>
-            </b-form-group>
+            <input-simple type="text"
+                          required
+                          placeholder="Username"
+                          v-model="form.login"
+            />
+            <input-simple type="password"
+                          required
+                          placeholder="Password"
+                          v-model="form.password"
+            />
             <b-button type="submit" variant="primary">Sign in</b-button>
           </b-form>
         </b-col>
@@ -34,9 +28,11 @@
 
 <script>
   import HttpClient from '../helpers/HttpClient';
+  import InputSimple from './form/InputSimple';
 
   export default {
     name: "LoginForm",
+    components: { InputSimple },
     mixins: [HttpClient],
     data() {
       return {

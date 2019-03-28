@@ -14,6 +14,9 @@ export default {
     },
     delete: function (path) {
       return axios.delete(pathFrom(path));
+    },
+    put: function (path, payload) {
+      return axios.put(pathFrom(path), payload);
     }
   }
 };
