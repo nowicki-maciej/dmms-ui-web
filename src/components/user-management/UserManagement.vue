@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+
     <div id="container-btn-add-user">
       <b-button id="btn-add-user" variant="success" v-b-modal.new-user-modal>
         <font-awesome-icon icon="user-plus"/>
@@ -7,54 +8,43 @@
       </b-button>
     </div>
 
-    <user-list :users="users" @user-edit="userEdit"/>
+    <user-list :users="users"
+               @change="refreshUserList"
+    />
 
-    <user-details-modal :user="newUser"
-                        :onSubmit="registerNewUser"/>
+    <user-details-modal @change="refreshUserList"/>
   </div>
 </template>
 
 <script>
   import UserList from "./UserList";
   import UserDetailsModal from "./UserDetailsModal";
+  import HttpClient from "../../helpers/HttpClient";
 
   export default {
     name: "UserManagement",
     components: { UserDetailsModal, UserList },
+    mixins: [HttpClient],
     data() {
       return {
-        users: [
-          {
-            id: 1,
-            login: "login1",
-            displayName: "Jan Kowalski",
-            email: 'jkowalski@gmail.com',
-            role: "ADMIN"
-          },
-          {
-            id: 2,
-            login: "login2",
-            displayName: "Andrzej Nowak",
-            email: 'anowak@gmail.com',
-            role: "USER"
-          }
-        ],
-        newUser: {
-          login: '',
-          password: '',
-          repeatedPassword: '',
-          email: '',
-          displayName: '',
-          type: null,
-        }
+        users: [],
       }
     },
+    mounted: function () {
+      this.refreshUserList();
+    },
     methods: {
-      userEdit: function (id) {
-        console.log("User edit of ID ", id);
-      },
-      registerNewUser: function () {
-        console.log("Registering new user: ", this.newUser)
+      refreshUserList: function () {
+        const vm = this;
+        this.$store.commit('appLoading', true);
+
+        this.get("/users")
+          .then(response => {
+            vm.users = response.data;
+          })
+          .finally(() => {
+            vm.$store.commit('appLoading', false);
+          });
       }
     }
   }

@@ -2,28 +2,22 @@
   <div>
     <b-container>
       <b-row>
-          <img class="logo" src="/static/logo.png" alt="logo">
+        <img class="logo" src="/static/logo.png" alt="logo">
       </b-row>
       <b-row>
         <b-col md="4" offset-md="4" class="login-form">
           <h1>Sign in to DMMS</h1>
           <b-form @submit.prevent="onSubmit">
-            <b-form-group>
-              <b-form-input id="login-form_username"
-                            type="text"
-                            v-model="form.username"
-                            required
-                            placeholder="Username">
-              </b-form-input>
-            </b-form-group>
-            <b-form-group>
-              <b-form-input id="login-form_password"
-                            type="password"
-                            v-model="form.password"
-                            required
-                            placeholder="Password">
-              </b-form-input>
-            </b-form-group>
+            <input-simple type="text"
+                          required
+                          placeholder="Username"
+                          v-model="form.login"
+            />
+            <input-simple type="password"
+                          required
+                          placeholder="Password"
+                          v-model="form.password"
+            />
             <b-button type="submit" variant="primary">Sign in</b-button>
           </b-form>
         </b-col>
@@ -33,16 +27,15 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import HttpClient from '../helpers/HttpClient';
+  import InputSimple from './form/InputSimple';
 
   export default {
     name: "LoginForm",
+    components: { InputSimple },
+    mixins: [HttpClient],
     data() {
       return {
-        user: {
-          email: '',
-          password: '',
-        },
         form: {
           login: '',
           password: ''
@@ -51,19 +44,15 @@
     },
     methods: {
       onSubmit: function () {
-        // TODO integrate with backend
-        // const vm = this;
-        //
-        // let payload = {
-        //   email: this.form.email,
-        //   password: this.form.password
-        // };
-        //
-        // axios.post("http://localhost:9090/users", payload)
-        //   .then(function () {
-        //     vm.registerSuccessful = true;
-        //     vm.$router.push("/")
-        //   });
+        let login = this.form.login;
+        let password = this.form.password;
+        const vm = this;
+
+        this.post("/user-management/login", { login, password })
+          .then(response => {
+            localStorage.setItem('currentUser', JSON.stringify(response.data));
+            vm.$router.push('/user-management');
+          });
       }
     }
   }
@@ -71,7 +60,6 @@
 
 <style scoped>
   .logo {
-    /*display: block;*/
     margin-left: auto;
     margin-right: auto;
     height: 250px;
