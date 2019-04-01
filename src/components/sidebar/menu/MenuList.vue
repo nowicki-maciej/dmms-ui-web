@@ -23,8 +23,10 @@
         this.$store.commit('appLoading', true);
         this.post('/user-management/logout', {})
           .then(() => {
-            vm.$store.commit('appLoading', false);
             vm.$router.push("/");
+          })
+          .finally(() => {
+            vm.$store.commit('appLoading', false);
           });
       }
     }

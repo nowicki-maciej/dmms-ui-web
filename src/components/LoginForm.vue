@@ -49,10 +49,12 @@
 
         this.post("/user-management/login", { login, password })
           .then(response => {
-            vm.$store.commit('appLoading', false);
             localStorage.setItem('currentUser', JSON.stringify(response.data));
             vm.$router.push('/library');
-          });
+          })
+          .finally(() => {
+            vm.$store.commit('appLoading', false);
+          })
       }
     }
   }
