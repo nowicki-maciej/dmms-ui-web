@@ -58,8 +58,8 @@
   }
 
   #container {
-    width: 70%;
-    margin: 0 auto;
+    /*width: 70%;*/
+    /*margin: 0 auto;*/
   }
 
 </style>
