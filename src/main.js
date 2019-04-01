@@ -8,6 +8,7 @@ import store from './store';
 require('./config/fontsawesome');
 require('./config/axios');
 require('./config/bootstrap');
+require('./config/layouts');
 
 require('./assets/css/global.css');
 

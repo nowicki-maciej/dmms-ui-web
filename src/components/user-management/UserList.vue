@@ -6,10 +6,6 @@
              :fields="fields"
              :items="users">
 
-      <template slot="role" slot-scope="data">
-        {{ data.value.toLowerCase() }}
-      </template>
-
       <template slot="action" slot-scope="row">
         <b-button variant="primary"
                   v-b-modal.edit-user-modal
@@ -38,6 +34,11 @@
   import HttpClient from "../../helpers/HttpClient";
   import UserEditModal from './UserEditModal';
 
+  const ROLES = [
+    { name: 'ROLE_ADMIN', display: 'Administrator' },
+    { name: 'ROLE_USER', display: 'Użytkownik' },
+  ];
+
   export default {
     name: "UserList",
     components: { UserEditModal },
@@ -52,7 +53,7 @@
           { key: 'login', label: 'Login' },
           { key: 'displayName', label: 'Display name' },
           { key: 'email', label: 'Email' },
-          { key: 'role', label: 'Role' },
+          { key: 'role', label: 'Role', formatter: 'formatRole' },
           { key: 'action', label: 'Action' },
         ],
         currentUserId: JSON.parse(localStorage.getItem('currentUser')).id,
@@ -82,6 +83,9 @@
             vm.$emit('change');
           });
       },
+      formatRole: function (role) {
+        return ROLES.filter(r => r.name === role)[0].display;
+      }
     },
   }
 </script>
