@@ -3,7 +3,7 @@
     <font-awesome-icon class="user-photo" icon="camera"/>
     <p>
       <span>
-        {{ username }}
+        {{ user.displayName || user.login }}
         <font-awesome-icon class="caret-down-icon" icon="caret-down"/>
       </span>
     </p>
@@ -18,7 +18,7 @@
     mixins: [HttpClient],
     data() {
       return {
-        username: JSON.parse(localStorage.getItem('currentUser')).login,
+        user: JSON.parse(localStorage.getItem('currentUser')),
       }
     },
   }

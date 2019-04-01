@@ -11,7 +11,7 @@ const router = new Router({
     {
       path: '/',
       meta: {
-        title: 'Logowanie',
+        title: 'Login',
         layout: 'no-sidebar'
       },
       name: 'LoginForm',
@@ -20,7 +20,7 @@ const router = new Router({
     {
       path: '/library',
       meta: {
-        title: 'Biblioteka',
+        title: 'Library',
       },
       name: 'Library',
       component: Library
@@ -28,7 +28,7 @@ const router = new Router({
     {
       path: '/user-management',
       meta: {
-        title: 'Użytkownicy'
+        title: 'Users'
       },
       name: 'UserManagement',
       component: UserManagement

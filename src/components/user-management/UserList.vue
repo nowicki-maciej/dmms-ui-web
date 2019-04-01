@@ -36,7 +36,7 @@
 
   const ROLES = [
     { name: 'ROLE_ADMIN', display: 'Administrator' },
-    { name: 'ROLE_USER', display: 'Użytkownik' },
+    { name: 'ROLE_USER', display: 'User' },
   ];
 
   export default {

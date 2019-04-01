@@ -1,10 +1,10 @@
 <template>
   <ul>
-    <menu-item icon="book" link="/library">Biblioteka</menu-item>
-    <menu-item icon="users" link="/user-management">Użytkownicy</menu-item>
-    <menu-item icon="sign-out-alt" @click="logout">Wyloguj się</menu-item>
-<!--    <menu-item icon="share">Udostępnione</menu-item>-->
-<!--    <menu-item icon="cogs">Ustawienia</menu-item>-->
+    <menu-item icon="book" link="/library">Library</menu-item>
+    <menu-item icon="users" link="/user-management">Users</menu-item>
+    <menu-item icon="sign-out-alt" @click="logout">Logout</menu-item>
+<!--    <menu-item icon="share">Sharing</menu-item>-->
+<!--    <menu-item icon="cogs">Settings</menu-item>-->
   </ul>
 </template>
 

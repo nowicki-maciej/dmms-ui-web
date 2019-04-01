@@ -30,11 +30,11 @@
     data() {
       return {
         fields: [
-          { key: 'title', label: 'Tytuł' },
-          { key: 'authors', label: 'Autor', formatter: 'formatAuthors' },
-          { key: 'categories', label: 'Gatunek', formatter: 'formatCategories' },
-          { key: 'formats', label: 'Formaty' },
-          { key: 'action', label: 'Akcje' },
+          { key: 'title', label: 'Title' },
+          { key: 'authors', label: 'Author', formatter: 'formatAuthors' },
+          { key: 'categories', label: 'Category', formatter: 'formatCategories' },
+          { key: 'formats', label: 'Formats' },
+          { key: 'action', label: 'Actions' },
         ],
       }
     },
