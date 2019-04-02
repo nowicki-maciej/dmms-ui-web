@@ -11,13 +11,14 @@
 
 <script>
   import Loading from 'vue-loading-overlay';
-  import 'vue-loading-overlay/dist/vue-loading.css'
+  import HttpClient from "./helpers/HttpClient";
 
   const DEFAULT_LAYOUT = 'default';
 
   export default {
     name: 'App',
     components: { Loading },
+    mixins: [HttpClient],
     computed: {
       layout() {
         return (this.$route.meta.layout || DEFAULT_LAYOUT) + '-layout';

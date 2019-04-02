@@ -51,6 +51,9 @@
         this.$store.commit('appLoading', true);
         const vm = this;
 
+        console.log("Login: ", login);
+        console.log("Password: ", password);
+
         this.post("/user-management/login", { login, password })
           .then(response => {
             localStorage.setItem('currentUser', JSON.stringify(response.data));
@@ -63,6 +66,14 @@
             vm.$store.commit('appLoading', false);
           })
       }
+    },
+    mounted() {
+      const vm = this;
+
+      this.get('/users/current')
+        .then(() => {
+          vm.$router.push("/library");
+        });
     }
   }
 </script>

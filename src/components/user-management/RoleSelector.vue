@@ -20,8 +20,13 @@
       'value'
     ],
     data() {
-      return {
-        accountTypeOptions: ACCOUNT_ROLES,
+      return {}
+    },
+    computed: {
+      accountTypeOptions() {
+        return ACCOUNT_ROLES.map(role => {
+          return { value: role.name, text: role.displayName };
+        });
       }
     },
     methods: {
