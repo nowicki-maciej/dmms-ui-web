@@ -7,12 +7,15 @@
       <b-col md="2" offset-md="5">
         <h2>Sign in to DMMS</h2>
         <b-form @submit.prevent="onSubmit">
+          <b-form-invalid-feedback :state="validationState">Incorrect login or password</b-form-invalid-feedback>
           <input-simple type="text"
+                        :state="validationState"
                         required
                         placeholder="Username"
                         v-model="form.login"
           />
           <input-simple type="password"
+                        :state="validationState"
                         required
                         placeholder="Password"
                         v-model="form.password"
@@ -38,6 +41,7 @@
           login: '',
           password: ''
         },
+        validationState: null,
       }
     },
     methods: {
@@ -51,6 +55,9 @@
           .then(response => {
             localStorage.setItem('currentUser', JSON.stringify(response.data));
             vm.$router.push('/library');
+          })
+          .catch(() => {
+            vm.validationState = false;
           })
           .finally(() => {
             vm.$store.commit('appLoading', false);
