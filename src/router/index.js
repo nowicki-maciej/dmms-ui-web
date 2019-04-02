@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginForm from "../components/LoginForm";
 import UserManagement from "../components/user-management/UserManagement";
+import BookManagement from "../components/book-management/BookManagement";
 
 Vue.use(Router);
 
@@ -22,6 +23,14 @@ const router = new Router({
       },
       name: 'UserManagement',
       component: UserManagement
+    },
+    {
+      path: '/book-management',
+      meta: {
+        title: "Book management"
+      },
+      name: 'BookManagement',
+      component: BookManagement
     }
   ]
 });
