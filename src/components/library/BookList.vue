@@ -8,15 +8,17 @@
 
       <span slot="authors" slot-scope="data" v-html="data.value"></span>
 
-      <template slot="formats" slot-scope="data">
-        <template v-for="format of data.value">
-          <b-button :class="formatClassName(format)">{{ format.toUpperCase() }}</b-button>
-        </template>
+      <template slot="formats" slot-scope="row">
+        <download-buttons :book="row.item"/>
       </template>
 
       <template slot="action" slot-scope="data">
-        <b-button class="action"><font-awesome-icon icon="cloud-download-alt"/></b-button>
-        <b-button class="action"><font-awesome-icon icon="ellipsis-h"/></b-button>
+        <b-button class="action">
+          <font-awesome-icon icon="cloud-download-alt"/>
+        </b-button>
+        <b-button class="action">
+          <font-awesome-icon icon="ellipsis-h"/>
+        </b-button>
       </template>
 
     </b-table>
@@ -24,8 +26,11 @@
 </template>
 
 <script>
+  import DownloadButtons from "../DownloadButtons";
+
   export default {
     name: "BookList",
+    components: { DownloadButtons },
     props: ['books'],
     data() {
       return {
@@ -46,9 +51,6 @@
       formatCategories: function (categories) {
         return categories.map(category => category.name)
           .join(", ");
-      },
-      formatClassName: function (format) {
-        return 'format format-' + format.toLowerCase();
       }
     }
   }
@@ -61,22 +63,5 @@
 
   .action {
     background-color: #085394;
-  }
-
-  .format {
-    color: black;
-    margin: 0 5px;
-  }
-
-  .format-pdf {
-    background-color: #ea9999;
-  }
-
-  .format-epub {
-    background-color: #f9cb9c;
-  }
-
-  .format-mobi {
-    background-color: #b4a7d6;
   }
 </style>

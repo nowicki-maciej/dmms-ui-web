@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import LoginForm from "../components/LoginForm";
 import UserManagement from "../components/user-management/UserManagement";
 import Library from "../components/library/Library";
+import BookDetails from "../components/library/BookDetails";
 
 Vue.use(Router);
 
@@ -32,6 +33,14 @@ const router = new Router({
       },
       name: 'UserManagement',
       component: UserManagement
+    },
+    {
+      path: '/library/book/:bookId',
+      meta: {
+        title: 'Book'
+      },
+      name: 'BookDetails',
+      component: BookDetails
     }
   ]
 });
