@@ -28,30 +28,32 @@
       </b-form>
     </b-container>
 
+    <vue-bootstrap-typeahead
+      :data="authors"
+      v-model="selectedAuthor"
+      size="lg"
+      :serializer="s => s.firstName + ' ' + s.lastName"
+      placeholder="Author"
+      @hit="onHit"
+      @keyup.enter.native="onEnter"
+    />
 
-    <vue-autosuggest
-      :suggestions="[{data:authors}]"
-      :input-props="{id:'autosuggest__input', onInputChange: onInputChange, placeholder:'Authors'}"
-      @selected="selectHandler"
-    >
-      <template slot-scope="{suggestion}">
-        <span class="my-suggestion-item">{{suggestion.item}}</span>
-      </template>
-    </vue-autosuggest>
 
   </div>
 
 </template>
 
 <script>
-  import { VueAutosuggest } from 'vue-autosuggest';
+  import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
   import InputSimple from "../form/InputSimple";
 
   export default {
     name: "BookManagement",
-    components: { InputSimple, VueAutosuggest },
+    components: { InputSimple, VueBootstrapTypeahead },
     data() {
       return {
+        selectedAuthor: '',
+        selectedAuthors: [],
         selected: [],
         categories: [
           { value: 'cat 1', text: 'This is First option' },
@@ -64,20 +66,35 @@
           { id: 3, firstName: 'Jarosław', lastName: 'Grzędowicz' },
           { id: 4, firstName: 'Steven', lastName: 'Hawking' },
         ]
-        // authors: [
-        //   'Tolkien',
-        //   'Piekara',
-        //   'Grzędowicz',
-        //   'Hawking',
-        // ]
       }
     },
     methods: {
-      selectHandler: function (item, item2) {
-        console.log(item, item2);
+      onEnter: function () {
+        let parts = this.splitAuthor(this.selectedAuthor);
+        this.selectedAuthors.push({ id: null, firstName: parts[0], lastName: parts[1] })
+        console.log(this.selectedAuthor);
+        console.log(this.selectedAuthors);
+        this.selectedAuthor = '';
+        console.log(this.selectedAuthor.length);
       },
-      onInputChange: function (item) {
-        console.log(item);
+      onHit: function () {
+
+        console.log(this.selectedAuthor);
+      },
+      splitAuthor: function (string) {
+        let parts = string.split(' ');
+        if (parts.length > 2) {
+          let out = [];
+          let name = '';
+          let i;
+          for (i = 0; i < parts.length - 1; i++) {
+            name.concat(parts[i]);
+          }
+          out.push(name);
+          out.push(parts[parts.length - 1]);
+          return out;
+        }
+        return parts;
       }
     }
   }
