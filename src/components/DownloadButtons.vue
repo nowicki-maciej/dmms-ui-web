@@ -1,7 +1,9 @@
 <template>
   <div>
     <template v-for="format in book.formats">
-      <b-button :class="formatClassName(format)">{{ format.toUpperCase() }}</b-button>
+      <a :href="'/api/books/' + book.id + '/' + format" download>
+        <b-button :class="formatClassName(format)">{{ format.toUpperCase() }}</b-button>
+      </a>
     </template>
   </div>
 </template>

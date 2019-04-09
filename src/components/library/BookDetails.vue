@@ -51,6 +51,7 @@
       const vm = this;
       this.get("/books/" + this.$route.params.bookId)
         .then(response => {
+          console.log("Data: ", response.data);
           vm.book = response.data;
         });
     }
