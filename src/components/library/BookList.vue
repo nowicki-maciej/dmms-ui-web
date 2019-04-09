@@ -3,6 +3,7 @@
     <b-table class="table-white"
              outlined
              hover
+             @row-clicked="onRowClicked"
              :fields="fields"
              :items="books">
 
@@ -51,6 +52,9 @@
       formatCategories: function (categories) {
         return categories.map(category => category.name)
           .join(", ");
+      },
+      onRowClicked: function (item) {
+        this.$router.push("/library/book/" + item.id)
       }
     }
   }

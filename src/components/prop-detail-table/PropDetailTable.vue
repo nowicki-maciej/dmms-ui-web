@@ -16,7 +16,10 @@
       <b-col>
         <img src="/static/lotr.jpg" alt="LOTR" style="max-width: 100%;">
 
-        <download-buttons />
+        <div class="download-section">
+          <h3>Download</h3>
+          <download-buttons :book="book"/>
+        </div>
       </b-col>
     </b-row>
   </div>
@@ -25,9 +28,9 @@
 <script>
   import DownloadButtons from "../DownloadButtons";
   export default {
-    name: "PropDetailTable",
+    name: "PropDetailTabl",
     components: { DownloadButtons },
-    props: ['rows']
+    props: ['rows', 'book']
   }
 </script>
 
@@ -39,5 +42,11 @@
 
   .detail {
     text-align: left;
+  }
+
+  .download-section {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 3px solid #35466d;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ book.title }}</h2>
-    <prop-detail-table :rows="rows"/>
+    <prop-detail-table :rows="rows" :book="book" />
 
 
   </div>
@@ -18,9 +18,9 @@
     data() {
       return {
         book: {
-          author: {},
+          authors: [],
           categories: [],
-
+          // tags: [],
         },
         user: {
           name: "Admin"
@@ -35,7 +35,7 @@
           { prop: 'Owner', detail: this.user.name },
           { prop: 'Description', detail: this.book.description },
           { prop: 'ISBN', detail: this.book.isbn },
-          { prop: 'Tags', detail: this.book.tags.join(", ") },
+          // { prop: 'Tags', detail: this.book.tags.join(", ") },
         ];
       }
     },
