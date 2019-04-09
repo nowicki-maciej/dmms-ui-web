@@ -1,101 +1,80 @@
 <template>
-
   <div id="container">
-
-    <b-container>
-      <b-form>
-        <b-row>
-          <b-col>
-            <input-simple type="text"
-                          required
-                          placeholder="Title"
-            />
-            <input-simple type="text"
-                          placeholder="ISBN"
-            />
-            <!--<textarea>Opis</textarea>-->
-          </b-col>
-          <b-col>
-            <b-form-select v-model="selected"
-                           :options="categories"
-                           multiple
-                           :select-size="4">
-            </b-form-select>
-
-
-          </b-col>
-        </b-row>
-      </b-form>
-    </b-container>
-
-    <vue-bootstrap-typeahead
-      :data="authors"
-      v-model="selectedAuthor"
-      size="lg"
-      :serializer="s => s.firstName + ' ' + s.lastName"
-      placeholder="Author"
-      @hit="onHit"
-      @keyup.enter.native="onEnter"
-    />
-
+    <h1>Book addition</h1>
+    <b-form>
+      <b-row>
+        <b-col>
+          <input-simple type="text"
+                        required
+                        placeholder="Title"
+          />
+          <input-simple type="text"
+                        placeholder="ISBN"
+          />
+          <b-form-textarea v-model="book.description"
+                           placeholder="Description"
+                           rows="8"
+          />
+        </b-col>
+        <b-col>
+          <b-form-select v-model="selected"
+                         :options="categories"
+                         multiple
+                         :select-size="4"/>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="6">
+          <tags-input v-model="book.authors"
+                      :autocompleteSupplier="authorsSupplier"
+                      :autocompleteSerializer="author => author.name + ' ' + author.surname"
+                      :newValueCallback="newAuthor"
+                      placeholder="Add authors"
+          />
+        </b-col>
+      </b-row>
+    </b-form>
 
   </div>
-
 </template>
 
 <script>
-  import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
   import InputSimple from "../form/InputSimple";
+  import TagsInput from "../form/TagsInput";
+  import HttpClient from "../../helpers/HttpClient";
 
   export default {
     name: "BookManagement",
-    components: { InputSimple, VueBootstrapTypeahead },
+    components: { InputSimple, TagsInput },
+    mixins: [HttpClient],
     data() {
       return {
-        selectedAuthor: '',
-        selectedAuthors: [],
-        selected: [],
+        book: {
+          description: '',
+          authors: [],
+        },
         categories: [
           { value: 'cat 1', text: 'This is First option' },
           { value: 'cat 2', text: 'Default Selected Option' },
           { value: 'cat 3', text: 'This is another option' },
         ],
-        authors: [
-          { id: 1, firstName: 'J.R.R.', lastName: 'Tolkien' },
-          { id: 2, firstName: 'Jacek', lastName: 'Piekara' },
-          { id: 3, firstName: 'Jarosław', lastName: 'Grzędowicz' },
-          { id: 4, firstName: 'Steven', lastName: 'Hawking' },
-        ]
       }
     },
     methods: {
-      onEnter: function () {
-        let parts = this.splitAuthor(this.selectedAuthor);
-        this.selectedAuthors.push({ id: null, firstName: parts[0], lastName: parts[1] })
-        console.log(this.selectedAuthor);
-        console.log(this.selectedAuthors);
-        this.selectedAuthor = '';
-        console.log(this.selectedAuthor.length);
+      authorsSupplier: function () {
+        return this.get("/authors");
       },
-      onHit: function () {
+      newAuthor: function (text) {
+        let parts = text.split(' ');
 
-        console.log(this.selectedAuthor);
-      },
-      splitAuthor: function (string) {
-        let parts = string.split(' ');
-        if (parts.length > 2) {
-          let out = [];
-          let name = '';
-          let i;
-          for (i = 0; i < parts.length - 1; i++) {
-            name.concat(parts[i]);
-          }
-          out.push(name);
-          out.push(parts[parts.length - 1]);
-          return out;
+        let name = parts.slice(0, parts.length - 1).join(' ');
+        let surname = parts[parts.length - 1];
+
+        return {
+          name,
+          surname
         }
-        return parts;
-      }
+      },
     }
   }
 </script>
