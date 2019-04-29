@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button id="btn-add-book" variant="success" @click="$router.push('/library/book/new')">
-      <font-awesome-icon icon="user-plus"/>
+      <font-awesome-icon icon="book-medical"/>
       Add new book
     </b-button>
 
