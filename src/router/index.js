@@ -4,7 +4,7 @@ import LoginForm from "../components/LoginForm";
 import UserManagement from "../components/user-management/UserManagement";
 import Library from "../components/library/Library";
 import BookDetails from "../components/library/BookDetails";
-import BookManagement from "../components/book-management/BookManagement";
+import BookAddForm from "../components/library/book-add-form/BookAddForm";
 
 Vue.use(Router);
 
@@ -36,20 +36,20 @@ const router = new Router({
       component: UserManagement
     },
     {
+      path: '/library/book/new',
+      meta: {
+        title: "Book addition"
+      },
+      name: 'BookAddForm',
+      component: BookAddForm
+    },
+    {
       path: '/library/book/:bookId',
       meta: {
         title: 'Book'
       },
       name: 'BookDetails',
       component: BookDetails
-    },
-    {
-      path: '/book-management',
-      meta: {
-        title: "Book management"
-      },
-      name: 'BookManagement',
-      component: BookManagement
     }
   ]
 });

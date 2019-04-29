@@ -1,5 +1,10 @@
 <template>
   <div>
+    <b-button id="btn-add-book" variant="success" @click="$router.push('/library/book/new')">
+      <font-awesome-icon icon="book-medical"/>
+      Add new book
+    </b-button>
+
     <book-list :books="books" />
   </div>
 </template>
@@ -38,5 +43,9 @@
 </script>
 
 <style scoped>
-
+  #btn-add-book {
+    margin-bottom: 10px;
+    float: right;
+    clear: both;
+  }
 </style>

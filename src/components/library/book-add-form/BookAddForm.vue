@@ -13,20 +13,6 @@
                         v-model="book.isbn"
                         placeholder="ISBN"
           />
-          <b-form-textarea v-model="book.description"
-                           placeholder="Description"
-                           rows="8"
-          />
-        </b-col>
-        <b-col>
-          <b-form-select v-model="book.categories"
-                         :options="categories"
-                         multiple
-                         :select-size="4"/>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="6">
           <tags-input v-model="book.authors"
                       :autocompleteSupplier="authorsSupplier"
                       :autocompleteSerializer="author => author.name + ' ' + author.surname"
@@ -34,10 +20,25 @@
                       placeholder="Add authors"
           />
         </b-col>
+        <b-col>
+          <b-form-select v-model="book.categories"
+                         :options="categories"
+                         multiple
+                         :select-size="6"/>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-form-textarea v-model="book.description"
+                           placeholder="Description"
+                           rows="8"
+          />
+        </b-col>
       </b-row>
       <b-row>
         <b-col>
           <b-form-file
+            style="margin-top: 15px;"
             v-model="files"
             :state="Boolean(files)"
             placeholder="Choose files..."
@@ -57,18 +58,17 @@
         </b-col>
       </b-row>
     </b-form>
-
   </div>
 </template>
 
 <script>
-  import InputSimple from "../form/InputSimple";
-  import TagsInput from "../form/TagsInput";
-  import HttpClient from "../../helpers/HttpClient";
-  import axios from 'axios';
+  import InputSimple from "../../form/InputSimple";
+  import TagsInput from "../../form/TagsInput";
+  import HttpClient from "../../../helpers/HttpClient";
+  import axios from 'axios/index';
 
   export default {
-    name: "BookManagement",
+    name: "BookAddForm",
     components: { InputSimple, TagsInput },
     mixins: [HttpClient],
     data() {
@@ -111,6 +111,9 @@
         return { name, surname };
       },
       submitBook: function () {
+        this.$store.commit('appLoading', true);
+        const vm = this;
+
         let absentAuthors = this.book.authors.filter(author => author.id === undefined);
         let presentAuthors = this.book.authors.filter(author => author.id !== undefined)
           .map(author => author.id);
@@ -132,10 +135,14 @@
               formData.append("file[]", file);
             }
 
-            this.post("/books", formData);
+            this.post("/books", formData)
+              .then(() => {
+                vm.$store.commit('appLoading', false);
+                vm.$router.push('/library');
+              });
           });
       },
-      submitAuthors: function(authors) {
+      submitAuthors: function (authors) {
         if (!Array.isArray(authors)) {
           return false;
         }
@@ -154,10 +161,5 @@
 </script>
 
 <style scoped>
-
-  #container {
-    width: 70%;
-    margin: 0 auto;
-  }
 
 </style>

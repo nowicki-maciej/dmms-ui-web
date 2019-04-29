@@ -1,6 +1,5 @@
 <template>
-  <div id="container">
-
+  <div>
     <div id="container-btn-add-user">
       <b-button id="btn-add-user" variant="success" v-b-modal.new-user-modal>
         <font-awesome-icon icon="user-plus"/>
@@ -55,11 +54,6 @@
     margin-bottom: 10px;
     float: right;
     clear: both;
-  }
-
-  #container {
-    /*width: 70%;*/
-    /*margin: 0 auto;*/
   }
 
 </style>
