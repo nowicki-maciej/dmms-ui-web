@@ -65,7 +65,6 @@
           return i;
         });
 
-        console.log("SelectedItems: ", selectedItems);
         this.$emit('input', selectedItems);
       }
     }
