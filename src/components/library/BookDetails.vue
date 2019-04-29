@@ -20,6 +20,7 @@
         book: {
           authors: [],
           categories: [],
+          //TODO: implement tags
           // tags: [],
         },
         user: {
@@ -35,6 +36,7 @@
           { prop: 'Owner', detail: this.user.name },
           { prop: 'Description', detail: this.book.description },
           { prop: 'ISBN', detail: this.book.isbn },
+          //TODO: implement tags
           // { prop: 'Tags', detail: this.book.tags.join(", ") },
         ];
       }
