@@ -5,6 +5,7 @@
                   :value="value"
                   @input="updateValue"
                   :required="required"
+                  :state="state"
                   :placeholder="placeholder">
     </b-form-input>
   </b-form-group>
@@ -17,7 +18,8 @@
       'value',
       'type',
       'placeholder',
-      'required'
+      'required',
+      'state'
     ],
     methods: {
       updateValue(value) {

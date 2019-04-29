@@ -40,9 +40,11 @@
 <script>
   import InputSimple from '../form/InputSimple';
   import RoleSelector from './RoleSelector';
+  import HttpClient from "../../helpers/HttpClient";
 
   export default {
     name: 'UserDetailsModal',
+    mixins: [HttpClient],
     components: { InputSimple, RoleSelector },
     data() {
       return {
@@ -57,10 +59,10 @@
       }
     },
     methods: {
-      registerUser: function (user) {
+      registerUser: function () {
         const vm = this;
 
-        this.post("/users", user)
+        this.post("/users", this.newUser)
           .then(() => {
             vm.$emit('change');
           });
