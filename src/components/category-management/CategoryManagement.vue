@@ -7,38 +7,37 @@
       </b-button>
     </div>
 
-    <!--    <user-list :users="users"-->
-    <!--               @change="refreshUserList"-->
-    <!--    />-->
+    <category-list :categories="categories" @change="refreshCategoriesList" />
 
-    <category-add-modal/>
+    <category-add-modal @change="refreshCategoriesList" />
   </div>
 </template>
 
 <script>
   import HttpClient from "../../helpers/HttpClient";
   import CategoryAddModal from "./CategoryAddModal";
+  import CategoryList from "./CategoryList";
 
   export default {
     name: "CategoryManagement",
-    components: { CategoryAddModal },
+    components: { CategoryList, CategoryAddModal },
     mixins: [HttpClient],
     data() {
       return {
-        users: [],
+        categories: [],
       }
     },
     mounted: function () {
-      this.refreshUserList();
+      this.refreshCategoriesList();
     },
     methods: {
-      refreshUserList: function () {
+      refreshCategoriesList: function () {
         const vm = this;
         this.$store.commit('appLoading', true);
 
-        this.get("/users")
+        this.get("/categories")
           .then(response => {
-            vm.users = response.data;
+            vm.categories = response.data;
           })
           .finally(() => {
             vm.$store.commit('appLoading', false);

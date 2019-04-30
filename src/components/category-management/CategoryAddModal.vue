@@ -6,7 +6,7 @@
            size="lg"
            @ok="addCategory">
 
-    <b-form>
+    <b-form @submit.prevent>
       <input-simple v-model="categoryName"
                     placeholder="Category name"
       />
@@ -29,14 +29,16 @@
     },
     methods: {
       addCategory() {
+        const vm = this;
         let name = this.categoryName.trim().split(' ')
           .map(part => part.trim())
           .filter(part => part)
           .map(part => part[0].toUpperCase() + part.substring(1).toLowerCase())
           .join(' ');
 
-        console.log("Name: ", name);
-        this.post("/categories", { name });
+        this.categoryName = '';
+        this.post("/categories", { name })
+          .then(() => vm.$emit('change'));
       }
     },
   }
