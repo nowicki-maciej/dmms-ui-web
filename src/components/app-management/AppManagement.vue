@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <b-button variant="primary"
-              @click="downloadLogs()">
-      <font-awesome-icon icon="user-edit"/>
-    </b-button>
-
-  </div>
+  <b-row>
+    <b-col md="2">
+      <h2>Logs</h2>
+      <a href="/api/logs/download" download>
+        <b-button variant="primary">
+          <font-awesome-icon icon="cloud-download-alt"/>
+          Download logs
+        </b-button>
+      </a>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -14,14 +18,14 @@
 
   export default {
     name: "AppManagement",
-    components: { },
+    components: {},
     mixins: [HttpClient],
     props: [],
     data() {
 
     },
     methods: {
-      downloadLogs: function() {
+      downloadLogs: function () {
         this.get("/logs/download")
       }
     }
