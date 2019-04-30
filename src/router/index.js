@@ -5,6 +5,7 @@ import UserManagement from "../components/user-management/UserManagement";
 import Library from "../components/library/Library";
 import BookDetails from "../components/library/BookDetails";
 import BookAddForm from "../components/library/book-add-form/BookAddForm";
+import CategoryManagement from "../components/category-management/CategoryManagement";
 
 Vue.use(Router);
 
@@ -50,7 +51,15 @@ const router = new Router({
       },
       name: 'BookDetails',
       component: BookDetails
-    }
+    },
+    {
+      path: '/category-management',
+      meta: {
+        title: 'Category management'
+      },
+      name: 'CategoryManagement',
+      component: CategoryManagement
+    },
   ]
 });
 

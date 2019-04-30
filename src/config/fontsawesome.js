@@ -14,6 +14,8 @@ import {
   faEllipsisH,
   faSignOutAlt,
   faBookMedical,
+  faArchive,
+  faPlusSquare,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vue from "vue";
@@ -33,6 +35,8 @@ library.add(
   faEllipsisH,
   faSignOutAlt,
   faBookMedical,
+  faArchive,
+  faPlusSquare,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
