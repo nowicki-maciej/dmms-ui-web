@@ -14,8 +14,6 @@
       </b-col>
 
       <b-col>
-        <img src="/static/lotr.jpg" alt="LOTR" style="max-width: 100%;">
-
         <div class="download-section">
           <h3>Download</h3>
           <download-buttons :book="book"/>
@@ -28,7 +26,7 @@
 <script>
   import DownloadButtons from "../DownloadButtons";
   export default {
-    name: "PropDetailTabl",
+    name: "PropDetailTable",
     components: { DownloadButtons },
     props: ['rows', 'book']
   }
