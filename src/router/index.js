@@ -7,6 +7,8 @@ import BookDetails from "../components/library/BookDetails";
 import BookAddForm from "../components/library/book-add-form/BookAddForm";
 import AppManagement from "../components/app-management/AppManagement";
 import CategoryManagement from "../components/category-management/CategoryManagement";
+import SharedToMe from "../components/share/SharedToMe";
+import SharedToOthers from "../components/share/SharedToOthers";
 
 
 Vue.use(Router);
@@ -69,6 +71,22 @@ const router = new Router({
       },
       name: 'CategoryManagement',
       component: CategoryManagement
+    },
+    {
+      path: '/shared-to-me',
+      meta: {
+        title: 'Shared to me'
+      },
+      name: 'SharedToMe',
+      component: SharedToMe
+    },
+    {
+      path: '/shared-to-others',
+      meta: {
+        title: 'Shared to others'
+      },
+      name: 'SharedToOthers',
+      component: SharedToOthers
     },
   ]
 });

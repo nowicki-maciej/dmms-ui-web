@@ -14,11 +14,8 @@
       </template>
 
       <template slot="action" slot-scope="data">
-        <b-button class="action">
-          <font-awesome-icon icon="cloud-download-alt"/>
-        </b-button>
-        <b-button class="action">
-          <font-awesome-icon icon="ellipsis-h"/>
+        <b-button class="action" @click="shareActionClicked(data.item.id)" v-b-modal.share-modal>
+          <font-awesome-icon icon="share"/>
         </b-button>
       </template>
 
@@ -32,7 +29,7 @@
   export default {
     name: "BookList",
     components: { DownloadButtons },
-    props: ['books'],
+    props: ['books', 'share-enabled'],
     data() {
       return {
         fields: [
@@ -55,6 +52,9 @@
       },
       onRowClicked: function (item) {
         this.$router.push("/library/book/" + item.id)
+      },
+      shareActionClicked: function(bookId) {
+        this.$emit('share', bookId);
       }
     }
   }
