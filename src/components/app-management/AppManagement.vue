@@ -18,17 +18,7 @@
 
   export default {
     name: "AppManagement",
-    components: {},
-    mixins: [HttpClient],
-    props: [],
-    data() {
-
-    },
-    methods: {
-      downloadLogs: function () {
-        this.get("/logs/download")
-      }
-    }
+    mixins: [HttpClient]
   }
 </script>
 
