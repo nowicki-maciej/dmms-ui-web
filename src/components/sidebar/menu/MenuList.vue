@@ -4,7 +4,7 @@
     <menu-item icon="users" link="/user-management">Users</menu-item>
     <menu-item icon="sign-out-alt" @click="logout">Logout</menu-item>
 <!--    <menu-item icon="share">Sharing</menu-item>-->
-<!--    <menu-item icon="cogs">Settings</menu-item>-->
+    <menu-item icon="cogs" link="/app-management">Settings</menu-item>
   </ul>
 </template>
 
