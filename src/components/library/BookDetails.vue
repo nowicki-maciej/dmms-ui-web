@@ -3,7 +3,6 @@
     <h2>{{ book.title }}</h2>
     <prop-detail-table :rows="rows" :book="book" />
 
-
   </div>
 </template>
 
