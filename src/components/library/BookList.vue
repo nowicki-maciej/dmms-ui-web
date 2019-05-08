@@ -53,7 +53,7 @@
       onRowClicked: function (item) {
         this.$router.push("/library/book/" + item.id)
       },
-      shareActionClicked: function(bookId) {
+      shareActionClicked: function (bookId) {
         this.$emit('share', bookId);
       }
     }

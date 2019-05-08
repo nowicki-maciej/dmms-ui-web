@@ -19,9 +19,11 @@
 
 <script>
   import InputSimple from "../form/InputSimple";
+  import HttpClient from "../../helpers/HttpClient";
 
   export default {
     name: "ShareModal",
+    mixins: [HttpClient],
     components: { InputSimple },
     props: ['bookId'],
     data() {
@@ -31,9 +33,16 @@
     },
     methods: {
       shareBook: function () {
-        //TODO API CALL
+        this.post("/sharing", { receiver: this.username, booksId: [this.bookId] })
+          .then(() => {
+            alert("Shared!");
+          })
+          .catch(() => {
+            alert("Not shared!");
+          });
+
         console.log("Sharing book book of ID to user", this.bookId, this.username);
-        this.username = '';
+        this.this.username = '';
       }
     },
   }
