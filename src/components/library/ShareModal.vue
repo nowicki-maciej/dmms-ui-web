@@ -19,11 +19,10 @@
 
 <script>
   import InputSimple from "../form/InputSimple";
-  import HttpClient from "../../helpers/HttpClient";
+  import SharingService from "../../services/SharingService";
 
   export default {
     name: "ShareModal",
-    mixins: [HttpClient],
     components: { InputSimple },
     props: ['bookId'],
     data() {
@@ -33,15 +32,16 @@
     },
     methods: {
       shareBook: function () {
-        this.post("/sharing", { receiver: this.username, booksId: [this.bookId] })
+        const vm = this;
+
+        SharingService.createNewShare({ receiver: this.username, booksId: [this.bookId] })
           .then(() => {
-            alert("Shared!");
+            vm.nSuccess('Book was shared successfully');
           })
           .catch(() => {
-            alert("Not shared!");
+            vm.nError('Failed to share the book');
           });
 
-        console.log("Sharing book book of ID to user", this.bookId, this.username);
         this.this.username = '';
       }
     },

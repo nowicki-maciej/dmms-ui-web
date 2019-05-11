@@ -28,13 +28,11 @@
 </template>
 
 <script>
-  import HttpClient from '../helpers/HttpClient';
   import InputSimple from './form/InputSimple';
 
   export default {
     name: "LoginForm",
     components: { InputSimple },
-    mixins: [HttpClient],
     data() {
       return {
         form: {
@@ -63,14 +61,6 @@
           });
       }
     },
-    mounted() {
-      const vm = this;
-
-      this.get('/users/current')
-        .then(() => {
-          vm.$router.push("/library");
-        });
-    }
   }
 </script>
 

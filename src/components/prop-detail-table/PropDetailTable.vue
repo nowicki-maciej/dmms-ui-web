@@ -25,6 +25,7 @@
 
 <script>
   import DownloadButtons from "../DownloadButtons";
+
   export default {
     name: "PropDetailTable",
     components: { DownloadButtons },

@@ -13,12 +13,10 @@
 
 <script>
   import BookList from "./BookList";
-  import HttpClient from "../../helpers/HttpClient";
   import ShareModal from "./ShareModal";
 
   export default {
     name: "Library",
-    mixins: [HttpClient],
     components: { BookList, ShareModal },
     data() {
       return {

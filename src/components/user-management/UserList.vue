@@ -31,8 +31,8 @@
 </template>
 
 <script>
-  import HttpClient from "../../helpers/HttpClient";
   import UserEditModal from './UserEditModal';
+  import UserService from "../../services/UserService";
 
   const ROLES = [
     { name: 'ROLE_ADMIN', display: 'Administrator' },
@@ -42,7 +42,6 @@
   export default {
     name: "UserList",
     components: { UserEditModal },
-    mixins: [HttpClient],
     props: [
       'users',
       'onDelete'
@@ -78,7 +77,7 @@
 
       userDelete: function (id) {
         const vm = this;
-        this.delete("/users/" + id)
+        UserService.deleteUser(id)
           .then(() => {
             vm.$emit('change');
           });

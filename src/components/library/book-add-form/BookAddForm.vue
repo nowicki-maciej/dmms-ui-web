@@ -64,13 +64,14 @@
 <script>
   import InputSimple from "../../form/InputSimple";
   import TagsInput from "../../form/TagsInput";
-  import HttpClient from "../../../helpers/HttpClient";
   import axios from 'axios/index';
+  import CategoryService from "../../../services/CategoryService";
+  import AuthorService from "../../../services/AuthorService";
+  import BookService from "../../../services/BookService";
 
   export default {
     name: "BookAddForm",
     components: { InputSimple, TagsInput },
-    mixins: [HttpClient],
     data() {
       return {
         book: {
@@ -87,12 +88,12 @@
     },
     methods: {
       authorsSupplier: function () {
-        return this.get("/authors");
+        return AuthorService.getAll();
       },
       fetchCategories: function () {
         const vm = this;
 
-        this.get("/categories")
+        CategoryService.getAll()
           .then(response => {
             vm.categories = response.data.map(cat => {
               return {
@@ -135,11 +136,17 @@
               formData.append("file[]", file);
             }
 
-            this.post("/books", formData)
+            BookService.createNewBook(formData)
               .then(() => {
-                vm.$store.commit('appLoading', false);
                 vm.$router.push('/library');
-              });
+                vm.nSuccess('Adding book successful');
+              })
+              .catch(() => {
+                vm.nError('Failed to create book resource.');
+              })
+              .finally(() => {
+                vm.$store.commit('appLoading', false);
+              })
           });
       },
       submitAuthors: function (authors) {

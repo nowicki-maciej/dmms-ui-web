@@ -6,4 +6,12 @@ export default class BookService {
     return ApiClient.get('/books');
   }
 
+  static get(bookId) {
+    return ApiClient.get(`/books/${bookId}`);
+  }
+
+  static createNewBook(book) {
+    return ApiClient.post('/books', book);
+  }
+
 }

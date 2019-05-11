@@ -28,11 +28,19 @@ export const userModule = {
           commit('setUserDetails', response.data);
         });
     },
+    loadCurrent({ commit }) {
+      return UserService.current()
+        .then(response => {
+          commit('setUserDetails', response.data);
+
+          return response;
+        });
+    },
     fetchAllBooks({ commit }) {
       return BookService.getAll()
         .then(response => {
           commit('setBooks', response.data);
         });
-    }
+    },
   }
 };

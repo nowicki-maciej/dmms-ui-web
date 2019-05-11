@@ -7,7 +7,7 @@
     props: ['role'],
     render: function (createElement, context) {
       let isRoleSufficient = function (requiredRole) {
-        let currentUserRoleName = JSON.parse(localStorage.getItem("currentUser")).role;
+        let currentUserRoleName = context.parent.$store.state.user.role;
 
         let userRole = ROLES.find(el => el.name === currentUserRoleName);
 

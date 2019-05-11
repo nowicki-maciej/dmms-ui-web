@@ -18,12 +18,11 @@
 </template>
 
 <script>
-  import HttpClient from "../../helpers/HttpClient";
+  import CategoryService from "../../services/CategoryService";
 
   export default {
     name: "CategoryList",
     components: {},
-    mixins: [HttpClient],
     props: [
       'categories',
     ],
@@ -38,7 +37,7 @@
     methods: {
       categoryDelete: function (id) {
         const vm = this;
-        this.delete("/categories/" + id)
+        CategoryService.deleteCategory(id)
           .then(() => {
             vm.$emit('change');
           });

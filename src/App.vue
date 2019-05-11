@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="initialized">
     <loading :active.sync="appLoading"
              is-full-page></loading>
 
@@ -11,14 +11,17 @@
 
 <script>
   import Loading from 'vue-loading-overlay';
-  import HttpClient from "./helpers/HttpClient";
 
   const DEFAULT_LAYOUT = 'default';
 
   export default {
     name: 'App',
     components: { Loading },
-    mixins: [HttpClient],
+    data() {
+      return {
+        initialized: false
+      }
+    },
     computed: {
       layout() {
         return (this.$route.meta.layout || DEFAULT_LAYOUT) + '-layout';
@@ -26,6 +29,22 @@
       appLoading() {
         return this.$store.state.appLoading;
       }
+    },
+    mounted() {
+      const vm = this;
+
+      this.$store.dispatch('user/loadCurrent')
+        .then(response => {
+          if (response.status === 200) {
+            vm.$router.push("/library");
+          }
+        })
+        .catch(() => {
+          vm.$router.push("/");
+        })
+        .finally(() => {
+          vm.initialized = true;
+        });
     }
   }
 </script>
