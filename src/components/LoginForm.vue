@@ -51,10 +51,8 @@
         this.$store.commit('appLoading', true);
         const vm = this;
 
-        this.post("/user-management/login", { login, password })
-          .then(response => {
-            vm.$store.commit('currentUser', response.data);
-            localStorage.setItem('currentUser', JSON.stringify(response.data));
+        this.$store.dispatch('user/login', { login, password })
+          .then(() => {
             vm.$router.push('/library');
           })
           .catch(() => {
@@ -62,7 +60,7 @@
           })
           .finally(() => {
             vm.$store.commit('appLoading', false);
-          })
+          });
       }
     },
     mounted() {

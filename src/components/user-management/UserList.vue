@@ -56,7 +56,7 @@
           { key: 'role', label: 'Role', formatter: 'formatRole' },
           { key: 'action', label: 'Action' },
         ],
-        currentUserId: JSON.parse(localStorage.getItem('currentUser')).id,
+        currentUserId: this.$store.state.user.id,
         userToEdit: {},
         showUserEditModal: false,
         user: {

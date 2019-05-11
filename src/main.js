@@ -9,6 +9,7 @@ require('./config/fontsawesome');
 require('./config/axios');
 require('./config/components');
 require('./config/layouts');
+require('./config/mixins');
 
 require('./assets/css/global.css');
 
