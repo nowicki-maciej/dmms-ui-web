@@ -7,7 +7,11 @@ export default class UserService {
   }
 
   static logout() {
-    return ApiClient.post('/user-management/logout');
+    return ApiClient.post('/user-management/logout')
+      .then(response => {
+        this.current();
+        return response;
+      });
   }
 
   static current() {

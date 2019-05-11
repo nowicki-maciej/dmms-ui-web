@@ -35,7 +35,7 @@
 
       this.$store.dispatch('user/loadCurrent')
         .then(response => {
-          if (response.status === 200) {
+          if (response.status === 200 && this.$route.path === '/') {
             vm.$router.push("/library");
           }
         })
