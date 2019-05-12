@@ -12,6 +12,9 @@ const store = new Vuex.Store({
     appLoading (state, loading) {
       state.appLoading = loading;
     },
+    currentUser (state, currentUser) {
+      state.currentUser = currentUser;
+    },
   },
   actions: {
 

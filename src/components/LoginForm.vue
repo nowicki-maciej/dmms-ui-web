@@ -51,11 +51,9 @@
         this.$store.commit('appLoading', true);
         const vm = this;
 
-        console.log("Login: ", login);
-        console.log("Password: ", password);
-
         this.post("/user-management/login", { login, password })
           .then(response => {
+            vm.$store.commit('currentUser', response.data);
             localStorage.setItem('currentUser', JSON.stringify(response.data));
             vm.$router.push('/library');
           })

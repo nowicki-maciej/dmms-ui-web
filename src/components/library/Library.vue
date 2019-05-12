@@ -5,21 +5,25 @@
       Add new book
     </b-button>
 
-    <book-list :books="books" />
+    <book-list @share="shareBook" :books="books"/>
+
+    <share-modal :book-id="shareBookId"/>
   </div>
 </template>
 
 <script>
   import BookList from "./BookList";
   import HttpClient from "../../helpers/HttpClient";
+  import ShareModal from "./ShareModal";
 
   export default {
     name: "Library",
     mixins: [HttpClient],
-    components: { BookList },
+    components: { BookList, ShareModal },
     data() {
       return {
         books: [],
+        shareBookId: -1,
       }
     },
     mounted: function () {
@@ -37,6 +41,9 @@
           .finally(() => {
             vm.$store.commit('appLoading', false);
           });
+      },
+      shareBook: function (bookId) {
+        this.shareBookId = bookId;
       }
     }
   }

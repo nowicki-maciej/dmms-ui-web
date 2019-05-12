@@ -14,11 +14,6 @@ Vue.axios.interceptors.response.use((response) => { // intercept the global erro
 
     router.push('/');
   }
-  if (error.response.status === 404 && !originalRequest._retry) {
-    originalRequest._retry = true;
-    router.push('/');
-    return;
-  }
 
   return Promise.reject(error)
 });
