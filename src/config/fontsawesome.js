@@ -20,9 +20,6 @@ import {
   faRetweet,
   faShareSquare,
   faShareAlt,
-  faRetweet,
-  faShareSquare,
-  faShareAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vue from "vue";

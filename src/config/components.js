@@ -14,5 +14,6 @@ Vue.use(Loading);
 Vue.use(VueNoty, {
   timeout: 3000,
   progressBar: true,
-  layout: 'topRight'
+  layout: 'topRight',
+  theme: 'metroui',
 });
