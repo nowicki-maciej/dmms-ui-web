@@ -20,7 +20,6 @@
     components: { BookList, ShareModal },
     data() {
       return {
-        // books: [],
         shareBookId: -1,
       }
     },

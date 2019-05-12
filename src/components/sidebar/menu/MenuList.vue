@@ -16,9 +16,9 @@
 
 <script>
   import MenuItem from "./MenuItem";
+  import UserService from "../../../services/UserService";
   import RoleWrapper from "../../RoleWrapper";
   import { ADMIN_ROLE } from "../../../helpers/RoleHierarchy";
-  import UserService from "../../../services/UserService";
 
   export default {
     name: "MenuList",
