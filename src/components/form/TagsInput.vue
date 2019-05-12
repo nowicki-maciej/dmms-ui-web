@@ -1,6 +1,7 @@
 <template>
-  <div class="custom-vue-tags-input">
+  <div class="custom-vue-tags-input-wrapper">
     <vue-tags-input
+      class="custom-vue-tags-input"
       v-model="currentValue"
       :tags="items"
       :autocomplete-items="filteredAutocompleteItems"
@@ -72,7 +73,7 @@
 </script>
 
 <style>
-  .custom-vue-tags-input .vue-tags-input {
+  .custom-vue-tags-input-wrapper .custom-vue-tags-input.vue-tags-input {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
@@ -81,23 +82,23 @@
     margin: 15px 0;
   }
 
-  .vue-tags-input .ti-input {
+  .custom-vue-tags-input-wrapper .custom-vue-tags-input.vue-tags-input .ti-input {
     border: none;
     width: 100%;
   }
 
-  .vue-tags-input .ti-autocomplete {
+  .custom-vue-tags-input-wrapper .custom-vue-tags-input.vue-tags-input .ti-autocomplete {
     color: white;
     font-weight: bold;
     background-color: #244760;
   }
 
-  .vue-tags-input .ti-tag {
+  .custom-vue-tags-input-wrapper .custom-vue-tags-input.vue-tags-input .ti-tag {
     position: relative;
     width: 100%;
   }
 
-  .vue-tags-input .ti-actions {
+  .custom-vue-tags-input-wrapper .custom-vue-tags-input.vue-tags-input .ti-actions {
     position: absolute;
     right: 10px;
   }
