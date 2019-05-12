@@ -18,12 +18,11 @@
 <script>
   import UserList from "./UserList";
   import UserDetailsModal from "./UserDetailsModal";
-  import HttpClient from "../../helpers/HttpClient";
+  import UserService from "../../services/UserService";
 
   export default {
     name: "UserManagement",
     components: { UserDetailsModal, UserList },
-    mixins: [HttpClient],
     data() {
       return {
         users: [],
@@ -37,7 +36,7 @@
         const vm = this;
         this.$store.commit('appLoading', true);
 
-        this.get("/users")
+        UserService.getAll()
           .then(response => {
             vm.users = response.data;
           })

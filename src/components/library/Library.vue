@@ -13,17 +13,19 @@
 
 <script>
   import BookList from "./BookList";
-  import HttpClient from "../../helpers/HttpClient";
   import ShareModal from "./ShareModal";
 
   export default {
     name: "Library",
-    mixins: [HttpClient],
     components: { BookList, ShareModal },
     data() {
       return {
-        books: [],
         shareBookId: -1,
+      }
+    },
+    computed: {
+      books: function () {
+        return this.$store.state.user.books;
       }
     },
     mounted: function () {
@@ -32,14 +34,10 @@
     methods: {
       refreshBookList: function () {
         const vm = this;
-        this.$store.commit('appLoading', true);
 
-        this.get("/books")
-          .then(response => {
-            vm.books = response.data;
-          })
-          .finally(() => {
-            vm.$store.commit('appLoading', false);
+        this.$store.dispatch('user/fetchAllBooks')
+          .catch(() => {
+            vm.nError("Failed to fetch books.");
           });
       },
       shareBook: function (bookId) {

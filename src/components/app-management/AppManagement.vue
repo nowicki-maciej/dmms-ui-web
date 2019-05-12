@@ -14,11 +14,8 @@
 
 <script>
 
-  import HttpClient from "../../helpers/HttpClient";
-
   export default {
     name: "AppManagement",
-    mixins: [HttpClient]
   }
 </script>
 

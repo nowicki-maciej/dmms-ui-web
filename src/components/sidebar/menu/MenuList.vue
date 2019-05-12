@@ -16,13 +16,12 @@
 
 <script>
   import MenuItem from "./MenuItem";
-  import HttpClient from "../../../helpers/HttpClient";
+  import UserService from "../../../services/UserService";
   import RoleWrapper from "../../RoleWrapper";
   import { ADMIN_ROLE } from "../../../helpers/RoleHierarchy";
 
   export default {
     name: "MenuList",
-    mixins: [HttpClient],
     components: { MenuItem, RoleWrapper },
     data() {
       return {
@@ -34,7 +33,7 @@
         const vm = this;
 
         this.$store.commit('appLoading', true);
-        this.post('/user-management/logout', {})
+        UserService.logout()
           .then(() => {
             vm.$router.push("/");
           })

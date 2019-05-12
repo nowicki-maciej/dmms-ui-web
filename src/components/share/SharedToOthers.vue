@@ -4,11 +4,10 @@
 
 <script>
   import SharedToOthersList from "./SharedToOthersList";
-  import HttpClient from "../../helpers/HttpClient";
+  import SharingService from "../../services/SharingService";
 
   export default {
     name: "SharedToOthers",
-    mixins: [HttpClient],
     components: { SharedToOthersList },
     data() {
       return {
@@ -18,7 +17,7 @@
     mounted() {
       const vm = this;
 
-      this.get("/sharing")
+      SharingService.getAll()
         .then(response => {
           let data = response.data;
 

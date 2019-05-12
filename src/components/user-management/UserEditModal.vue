@@ -19,22 +19,17 @@
 <script>
   import InputSimple from '../form/InputSimple';
   import RoleSelector from './RoleSelector';
-  import HttpClient from "../../helpers/HttpClient";
+  import UserService from "../../services/UserService";
 
   export default {
     name: 'UserEditModal',
     components: { InputSimple, RoleSelector },
-    mixins: [HttpClient],
     props: ['user'],
     methods: {
       changeRole() {
         const vm = this;
-        const payload = {
-          id: this.user.id,
-          role: this.user.role,
-        };
 
-        this.put("/users/role", payload)
+        UserService.changeUserRole(this.user.id, this.user.role)
           .then(() => {
             vm.$emit('change');
           });

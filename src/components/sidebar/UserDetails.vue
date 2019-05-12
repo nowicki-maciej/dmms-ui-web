@@ -11,14 +11,12 @@
 </template>
 
 <script>
-  import HttpClient from "../../helpers/HttpClient";
 
   export default {
     name: "UserDetails",
-    mixins: [HttpClient],
     data() {
       return {
-        user: JSON.parse(localStorage.getItem('currentUser')),
+        user: this.$store.state.user,
       }
     },
   }

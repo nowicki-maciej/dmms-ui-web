@@ -14,14 +14,13 @@
 </template>
 
 <script>
-  import HttpClient from "../../helpers/HttpClient";
   import CategoryAddModal from "./CategoryAddModal";
   import CategoryList from "./CategoryList";
+  import CategoryService from "../../services/CategoryService";
 
   export default {
     name: "CategoryManagement",
     components: { CategoryList, CategoryAddModal },
-    mixins: [HttpClient],
     data() {
       return {
         categories: [],
@@ -35,7 +34,7 @@
         const vm = this;
         this.$store.commit('appLoading', true);
 
-        this.get("/categories")
+        CategoryService.getAll()
           .then(response => {
             vm.categories = response.data;
           })

@@ -8,11 +8,10 @@
 
 <script>
   import PropDetailTable from "../prop-detail-table/PropDetailTable";
-  import HttpClient from "../../helpers/HttpClient";
+  import BookService from "../../services/BookService";
 
   export default {
     name: "BookDetails",
-    mixins: [HttpClient],
     components: { PropDetailTable },
     data() {
       return {
@@ -50,9 +49,9 @@
     },
     mounted() {
       const vm = this;
-      this.get("/books/" + this.$route.params.bookId)
+
+      BookService.get(this.$route.params.bookId)
         .then(response => {
-          console.log("Data: ", response.data);
           vm.book = response.data;
         });
     }

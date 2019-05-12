@@ -28,13 +28,11 @@
 </template>
 
 <script>
-  import HttpClient from '../helpers/HttpClient';
   import InputSimple from './form/InputSimple';
 
   export default {
     name: "LoginForm",
     components: { InputSimple },
-    mixins: [HttpClient],
     data() {
       return {
         form: {
@@ -51,10 +49,8 @@
         this.$store.commit('appLoading', true);
         const vm = this;
 
-        this.post("/user-management/login", { login, password })
-          .then(response => {
-            vm.$store.commit('currentUser', response.data);
-            localStorage.setItem('currentUser', JSON.stringify(response.data));
+        this.$store.dispatch('user/login', { login, password })
+          .then(() => {
             vm.$router.push('/library');
           })
           .catch(() => {
@@ -62,17 +58,9 @@
           })
           .finally(() => {
             vm.$store.commit('appLoading', false);
-          })
+          });
       }
     },
-    mounted() {
-      const vm = this;
-
-      this.get('/users/current')
-        .then(() => {
-          vm.$router.push("/library");
-        });
-    }
   }
 </script>
 

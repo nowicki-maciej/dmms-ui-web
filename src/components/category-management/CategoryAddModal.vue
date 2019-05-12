@@ -16,12 +16,11 @@
 
 <script>
   import InputSimple from '../form/InputSimple';
-  import HttpClient from "../../helpers/HttpClient";
+  import CategoryService from "../../services/CategoryService";
 
   export default {
     name: 'CategoryAddModal',
     components: { InputSimple },
-    mixins: [HttpClient],
     data() {
       return {
         categoryName: '',
@@ -37,7 +36,7 @@
           .join(' ');
 
         this.categoryName = '';
-        this.post("/categories", { name })
+        CategoryService.addNewCategory({ name })
           .then(() => vm.$emit('change'));
       }
     },

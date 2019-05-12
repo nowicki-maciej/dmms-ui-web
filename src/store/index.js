@@ -1,12 +1,20 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
+import { userModule } from "./user";
 
+//TODO: try to move to components
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+  modules: {
+    user: {
+      namespaced: true,
+      ...userModule
+    },
+  },
+
   state: {
-    appLoading: false,
-    currentUser: null
+    appLoading: false
   },
   mutations: {
     appLoading (state, loading) {
@@ -20,5 +28,6 @@ const store = new Vuex.Store({
 
   }
 });
+
 
 export default store;
