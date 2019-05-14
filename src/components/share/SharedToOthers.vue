@@ -24,7 +24,8 @@
           vm.books = data.map(share => {
             return {
               ...share.book,
-              receiver: share.receiver
+              receiver: share.receiver,
+              server: share.server,
             }
           })
         })
