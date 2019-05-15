@@ -31,15 +31,14 @@
 
         UserService.changeUserRole(this.user.id, this.user.role)
           .then(() => {
+            vm.nSuccess('Successfully changed user role.');
             vm.$emit('change');
-          });
+          })
+          .catch(() => this.nError('Failed to change user role.'));
       }
     },
   }
 </script>
 
 <style scoped>
-  #new-user-modal {
-    color: black;
-  }
 </style>

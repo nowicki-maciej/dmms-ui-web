@@ -1,24 +1,19 @@
 <template>
-  <b-form-group>
-    <b-form-select :value="value"
-                   @input="updateRole"
-                   ref="roleSelect"
-                   :options="accountTypeOptions">
-      <template slot="first">
-        <option :value="null" disabled selected>-- Account type --</option>
-      </template>
-    </b-form-select>
-  </b-form-group>
+  <input-dropdown placeholder="-- Account type --"
+                  :options="accountTypeOptions"
+                  :value="value"
+                  @input="updateRole"
+  />
 </template>
 
 <script>
   import { ACCOUNT_ROLES } from '../../config/constants';
+  import InputDropdown from "../form/InputDropdown";
 
   export default {
     name: "RoleSelector",
-    props: [
-      'value'
-    ],
+    components: { InputDropdown },
+    props: ['value'],
     data() {
       return {}
     },
@@ -27,7 +22,7 @@
         return ACCOUNT_ROLES.map(role => {
           return { value: role.name, text: role.displayName };
         });
-      }
+      },
     },
     methods: {
       updateRole(value) {
