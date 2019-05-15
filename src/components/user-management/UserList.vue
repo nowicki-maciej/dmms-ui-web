@@ -25,6 +25,7 @@
     <user-edit-modal v-if="showUserEditModal"
                      :show="showUserEditModal"
                      :user="userToEdit"
+                     @change="$emit('change')"
     />
 
   </div>
@@ -72,7 +73,6 @@
       userEdit: function (id) {
         Object.assign(this.userToEdit, this.users.find(e => e.id === id));
         this.showUserEditModal = true;
-        this.$emit('edit-user-modal');
       },
 
       userDelete: function (id) {
@@ -80,7 +80,9 @@
         UserService.deleteUser(id)
           .then(() => {
             vm.$emit('change');
-          });
+            vm.nSuccess('Successfully deleted user.');
+          })
+          .catch(() => vm.nError('Failed to delete user.'));
       },
       formatRole: function (role) {
         return ROLES.filter(r => r.name === role)[0].display;

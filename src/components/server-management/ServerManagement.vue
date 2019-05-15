@@ -8,7 +8,7 @@
     </div>
 
     <server-list :servers="servers"/>
-    <new-server-modal/>
+    <new-server-modal @change="refreshServerList"/>
   </div>
 </template>
 
