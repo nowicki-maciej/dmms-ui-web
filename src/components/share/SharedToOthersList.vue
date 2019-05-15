@@ -31,7 +31,7 @@
           { key: 'categories', label: 'Category', formatter: 'formatCategories' },
           { key: 'formats', label: 'Formats' },
           { key: 'receiver', label: 'Receiver' },
-          { key: 'server', label: 'Server', formatter: 'formatServer' },
+          { key: 'server', label: 'Server' },
         ],
       }
     },
@@ -45,9 +45,6 @@
         return categories.map(category => category.name)
           .join(", ");
       },
-      formatServer: function () {
-        return 'local';
-      }
     }
   }
 </script>

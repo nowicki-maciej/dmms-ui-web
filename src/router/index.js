@@ -9,6 +9,7 @@ import AppManagement from "../components/app-management/AppManagement";
 import CategoryManagement from "../components/category-management/CategoryManagement";
 import SharedToMe from "../components/share/SharedToMe";
 import SharedToOthers from "../components/share/SharedToOthers";
+import ServerManagement from "../components/server-management/ServerManagement";
 
 
 Vue.use(Router);
@@ -55,6 +56,14 @@ const router = new Router({
       },
       name: 'BookDetails',
       component: BookDetails
+    },
+    {
+      path: '/server-management',
+      meta: {
+        title: 'Trusted servers management'
+      },
+      name: 'ServerManagement',
+      component: ServerManagement
     },
     {
       path: '/app-management',

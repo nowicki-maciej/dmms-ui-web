@@ -7,6 +7,7 @@
     <role-wrapper :role="ADMIN_ROLE">
       <menu-item icon="users" link="/user-management">Users</menu-item>
       <menu-item icon="archive" link="/category-management">Categories</menu-item>
+      <menu-item icon="server" link="/server-management">Trusted servers</menu-item>
       <menu-item icon="cogs" link="/app-management">Settings</menu-item>
     </role-wrapper>
 
