@@ -17,6 +17,10 @@
         <b-button class="action" @click="shareActionClicked(data.item.id)" v-b-modal.share-modal>
           <font-awesome-icon icon="share"/>
         </b-button>
+
+        <b-button variant="danger" @click="deleteBook(data.item.id)">
+          <font-awesome-icon icon="times-circle"/>
+        </b-button>
       </template>
 
     </b-table>
@@ -55,6 +59,9 @@
       },
       shareActionClicked: function (bookId) {
         this.$emit('share', bookId);
+      },
+      deleteBook: function(bookId) {
+        this.$emit('delete', bookId);
       }
     }
   }

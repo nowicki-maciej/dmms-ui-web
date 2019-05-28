@@ -5,7 +5,7 @@
       Add new book
     </b-button>
 
-    <book-list @share="shareBook" :books="books"/>
+    <book-list @share="shareBook" @delete="deleteBook" :books="books"/>
 
     <share-modal :book-id="shareBookId"/>
   </div>
@@ -14,6 +14,7 @@
 <script>
   import BookList from "./BookList";
   import ShareModal from "./ShareModal";
+  import BookService from "../../services/BookService";
 
   export default {
     name: "Library",
@@ -42,6 +43,16 @@
       },
       shareBook: function (bookId) {
         this.shareBookId = bookId;
+      },
+      deleteBook: function (bookId) {
+        const vm = this;
+
+        BookService.delete(bookId)
+          .then(() => {
+            vm.nSuccess('Book deleted.');
+            vm.refreshBookList();
+          })
+          .catch(() => vm.nError('Failed to delete book.'));
       }
     }
   }
