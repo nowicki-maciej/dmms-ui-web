@@ -16,7 +16,6 @@
     props: ['value', 'placeholder', 'options'],
     methods: {
       updateValue: function (value) {
-        // console.log("Updated Valued: ", value);
         this.$emit('input', value);
       }
     }

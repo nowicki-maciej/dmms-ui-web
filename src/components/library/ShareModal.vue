@@ -48,9 +48,6 @@
               return { value: element.assignedId, text: element.ipAddress }
             })
           ];
-
-
-          console.log("Servers: ", vm.servers);
         })
         .catch(() => vm.nError('Failed to fetch trusted servers. Please try again later.'));
     },
