@@ -21,6 +21,8 @@ import {
   faShareSquare,
   faShareAlt,
   faServer,
+  faCheckCircle,
+  faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vue from "vue";
@@ -47,6 +49,8 @@ library.add(
   faShareSquare,
   faShareAlt,
   faServer,
+  faCheckCircle,
+  faTimesCircle,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

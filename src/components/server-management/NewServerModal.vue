@@ -12,12 +12,6 @@
                     placeholder="Server IP"
       />
 
-      <input-simple type="text"
-                    v-model="server.assignedId"
-                    required
-                    placeholder="Server assigned ID"
-      />
-
       <input-dropdown placeholder="-- Server type --"
                       :options="serverTypes"
                       v-model="server.type"
@@ -40,7 +34,6 @@
       return {
         server: {
           ip: '',
-          assignedId: '',
           type: null,
         },
         serverTypes: [
@@ -58,13 +51,11 @@
 
         TrustedServerService.addNewServer({
           ipAddress: this.server.ip,
-          assignedId: this.server.assignedId,
           serverType: this.server.type,
         })
           .then(() => {
             vm.server = {
               ip: '',
-              assignedId: '',
               type: null,
             };
 

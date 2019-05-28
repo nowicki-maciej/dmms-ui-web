@@ -7,7 +7,7 @@
       </b-button>
     </div>
 
-    <server-list :servers="servers"/>
+    <server-list :servers="servers" @change="refreshServerList"/>
     <new-server-modal @change="refreshServerList"/>
   </div>
 </template>
