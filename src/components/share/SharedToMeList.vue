@@ -9,7 +9,7 @@
       <span slot="authors" slot-scope="data" v-html="data.value"></span>
 
       <template slot="formats" slot-scope="row">
-        <download-buttons :book="row.item"/>
+        <download-buttons :book="row.item" :link="row.item.downloadLink"/>
       </template>
 
     </b-table>
@@ -37,7 +37,6 @@
     },
     methods: {
       formatAuthors: function (authors) {
-        console.log("Books: ", this.books);
         return authors.map(author => author.name + ' ' + author.surname)
           .join("<br>");
       },

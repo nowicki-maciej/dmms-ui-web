@@ -50,5 +50,5 @@ npm run build --report
   - `Library.vue` - component with book list and 'Add new book' button
 
 - share:
-  - `SharedToMe.vue` - list of books shared to current user
+  - `SharedToMe.vue` - list of books shared to current user. Introduced book download
   - `SharedToOthers.vue` - list of books that current user shares to others

@@ -14,15 +14,9 @@
   export default {
     name: "InputDropdown",
     props: ['value', 'placeholder', 'options'],
-    data() {
-      return {
-        test: [
-          { value: '', text: '' },
-        ],
-      }
-    },
     methods: {
       updateValue: function (value) {
+        // console.log("Updated Valued: ", value);
         this.$emit('input', value);
       }
     }

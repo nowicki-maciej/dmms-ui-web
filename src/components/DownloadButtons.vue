@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-for="format in book.formats">
-      <a :href="'/api/books/' + book.id + '/' + format" download>
+      <a :href="bookLink(book.id, format)" download>
         <b-button :class="formatClassName(format)">{{ format.toUpperCase() }}</b-button>
       </a>
     </template>
@@ -11,10 +11,13 @@
 <script>
   export default {
     name: "DownloadButtons",
-    props: ['book'],
+    props: ['book', 'link'],
     methods: {
       formatClassName: function (format) {
         return 'format format-' + format.toLowerCase();
+      },
+      bookLink: function(bookId, format) {
+        return this.link ? this.link(bookId, format) : '/api/books/' + bookId + '/' + format;
       }
     },
   }

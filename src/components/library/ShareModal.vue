@@ -43,11 +43,14 @@
       TrustedServerService.getAll()
         .then(response => {
           vm.servers = [
-            { value: '0', text: 'localhost' },
+            { value: '-1', text: 'localhost' },
             ...response.data.map(element => {
-              return { value: element.id, text: element.ipAddress }
+              return { value: element.assignedId, text: element.ipAddress }
             })
           ];
+
+
+          console.log("Servers: ", vm.servers);
         })
         .catch(() => vm.nError('Failed to fetch trusted servers. Please try again later.'));
     },
@@ -55,7 +58,7 @@
       shareBook: function () {
         const vm = this;
 
-        SharingService.createNewShare({ receiver: this.username, booksId: [this.bookId] })
+        SharingService.createNewShare({ receiver: this.username, receiverServer: this.server, booksId: [this.bookId] })
           .then(() => {
             vm.nSuccess('Book was shared successfully');
           })

@@ -15,6 +15,15 @@
         books: [],
       };
     },
+    methods: {
+      formatDownloadLink: function(share) {
+        if (share.server.toLowerCase() === 'local') {
+          return (bookId, format) => `/api/books/${bookId}/${format}`;
+        } else {
+          return (bookId, format) => `https://dev.atreses.pl/api/books/${bookId}/${format}`;
+        }
+      }
+    },
     mounted() {
       const vm = this;
 
@@ -27,6 +36,7 @@
               ...share.book,
               owner: share.owner,
               server: share.server,
+              downloadLink: this.formatDownloadLink(share),
             }
           })
         })
