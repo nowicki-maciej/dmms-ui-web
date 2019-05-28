@@ -12,23 +12,44 @@
                     required
                     placeholder="Username"
       />
+      <input-dropdown placeholder="-- Server --"
+                      :options="servers"
+                      v-model="server"
+      />
     </b-form>
-
   </b-modal>
 </template>
 
 <script>
   import InputSimple from "../form/InputSimple";
   import SharingService from "../../services/SharingService";
+  import InputDropdown from "../form/InputDropdown";
+  import TrustedServerService from "../../services/TrustedServerService";
 
   export default {
     name: "ShareModal",
-    components: { InputSimple },
+    components: { InputDropdown, InputSimple },
     props: ['bookId'],
     data() {
       return {
         username: '',
+        server: null,
+        servers: [],
       }
+    },
+    mounted() {
+      const vm = this;
+
+      TrustedServerService.getAll()
+        .then(response => {
+          vm.servers = [
+            { value: '0', text: 'localhost' },
+            ...response.data.map(element => {
+              return { value: element.id, text: element.ipAddress }
+            })
+          ];
+        })
+        .catch(() => vm.nError('Failed to fetch trusted servers. Please try again later.'));
     },
     methods: {
       shareBook: function () {
