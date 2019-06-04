@@ -1,6 +1,24 @@
 # dmms-ui-web
 This repository holds Web UI implementation of DMMS application.
 
+## Functions Overview
+DMMS supports following features:
+
+* authorization and user management
+![authorization](images/ss01.png)
+![authorization](images/ss05.png)
+
+* book management
+![authorization](images/ss02.png)
+![authorization](images/ss03.png)
+
+* book sharing
+![authorization](images/ss04.png)
+![authorization](images/ss06.png)
+
+* notifications system
+![authorization](images/ss07.png)
+
 ## Build Setup
 
 ``` bash
