@@ -14,6 +14,10 @@ export default class BookService {
     return ApiClient.post('/books', book);
   }
 
+  static update(book) {
+    return ApiClient.put(`/books/${book.id}`, book);
+  }
+
   static delete(bookId) {
     return ApiClient.delete(`/books/${bookId}`);
   }
