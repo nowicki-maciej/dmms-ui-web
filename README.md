@@ -1,7 +1,7 @@
 # dmms-ui-web
 This repository holds Web UI implementation of DMMS application.
 
-## Functions Overview
+## Features overview
 DMMS supports following features:
 
 * authorization and user management
@@ -18,6 +18,18 @@ DMMS supports following features:
 
 * notifications system
 ![authorization](images/ss07.png)
+
+## Features in details
+
+### User features
+* Book management - adding book, modifying book, deleting book
+* Sharing book - sharing book to others (also to other servers), gaining access to someone's book
+
+### Admin features
+* Book categories management - adding and deleting book categories
+* User management - adding, modifying and deleting users in system
+* Share servers management - adding share servers, managing share servers addition request
+* System monitoring - logs downloading
 
 ## Build Setup
 
@@ -39,6 +51,7 @@ npm run build --report
 - Authorization (login, logout)
 - User management (display, addition, edition, deletion)
 - Book management (display, addition, downloading)
+- Book sharing (display, addition, downloading)
 
 ## Components responsibility
 - layout:
